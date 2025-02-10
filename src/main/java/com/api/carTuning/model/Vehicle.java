@@ -26,7 +26,7 @@ public class Vehicle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
-    private int productionDate;
+    private int productionYear;
     @Column
     private int horsePower;
     @Column(nullable = false)
