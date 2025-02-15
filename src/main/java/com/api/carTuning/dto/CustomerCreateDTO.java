@@ -28,5 +28,4 @@ public class CustomerCreateDTO {
     @Email(message = "Not an email format")
     @Size(max = 50)
     private String email;
-
 }

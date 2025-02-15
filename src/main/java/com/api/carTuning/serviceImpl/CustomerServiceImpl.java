@@ -2,6 +2,7 @@ package com.api.carTuning.serviceImpl;
 
 import com.api.carTuning.dto.CustomerCreateDTO;
 import com.api.carTuning.dto.CustomerResponseDTO;
+import com.api.carTuning.mapper.CustomerMapper;
 import com.api.carTuning.model.Customer;
 import com.api.carTuning.repository.CustomerRepository;
 import com.api.carTuning.service.CustomerService;
@@ -30,13 +31,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         customerRepository.save(customer);
 
-        return new CustomerResponseDTO(
-                customer.getId(),
-                customer.getFirstName(),
-                customer.getLastName(),
-                customer.getBirthDate(),
-                customer.getEmail()
-        );
+        return CustomerMapper.toDto(customer);//using Mapper
 
     }
 
@@ -45,26 +40,14 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Customer not found"));
 
-        return new CustomerResponseDTO(
-                customer.getId(),
-                customer.getFirstName(),
-                customer.getLastName(),
-                customer.getBirthDate(),
-                customer.getEmail()
-        );
+        return CustomerMapper.toDto(customer);
     }
 
     @Override
     public List<CustomerResponseDTO> getAllCustomers() {
         return customerRepository.findAll()
                 .stream()
-                .map(customer -> new CustomerResponseDTO(
-                        customer.getId(),
-                        customer.getFirstName(),
-                        customer.getLastName(),
-                        customer.getBirthDate(),
-                        customer.getEmail()
-                ))
+                .map(CustomerMapper::toDto)// converting each customer to dto
                 .collect(Collectors.toList());
     }
 
