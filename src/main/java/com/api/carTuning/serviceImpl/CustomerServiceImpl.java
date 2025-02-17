@@ -6,6 +6,7 @@ import com.api.carTuning.mapper.CustomerMapper;
 import com.api.carTuning.model.Customer;
 import com.api.carTuning.repository.CustomerRepository;
 import com.api.carTuning.service.CustomerService;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -52,6 +53,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    @Transactional // if error occurs - rolls back
     public void deleteCustomer(Long id) {
         if(!customerRepository.existsById(id)){
             throw new RuntimeException("Customer not found");

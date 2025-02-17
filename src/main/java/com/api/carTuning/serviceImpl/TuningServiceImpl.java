@@ -6,6 +6,7 @@ import com.api.carTuning.mapper.TuningMapper;
 import com.api.carTuning.model.Tuning;
 import com.api.carTuning.repository.TuningRepository;
 import com.api.carTuning.service.TuningService;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,6 +38,7 @@ public class TuningServiceImpl implements TuningService {
     }
 
     @Override
+    @Transactional // if error occurs - rolls back
     public void deleteTuning(Long id) {
         if(!tuningRepository.existsById(id)){
             throw new RuntimeException("Tuning not found");

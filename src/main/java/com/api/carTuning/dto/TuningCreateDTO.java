@@ -20,7 +20,6 @@ public class TuningCreateDTO {
     private String name;
     @NotNull(message = "Start Date can not be null")
     private LocalDate startDate;
-
     private LocalDate endDate;
     private BigDecimal price;
 }
