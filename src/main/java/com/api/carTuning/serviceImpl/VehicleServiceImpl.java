@@ -8,6 +8,7 @@ import com.api.carTuning.model.Vehicle;
 import com.api.carTuning.repository.VehicleRepository;
 import com.api.carTuning.service.VehicleService;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,11 @@ import java.util.stream.Collectors;
 @Service
 public class VehicleServiceImpl implements VehicleService {
     VehicleRepository vehicleRepository;
+    @Autowired
+    public VehicleServiceImpl(VehicleRepository vehicleRepository) {
+        this.vehicleRepository = vehicleRepository;
+    }
+
     @Override
     public VehicleResponseDTO createVehicle(VehicleCreateDTO vehicleCreateDto) {
         Vehicle vehicle = VehicleMapper.toEntity(vehicleCreateDto);

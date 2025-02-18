@@ -16,13 +16,14 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/tunings")
 public class TuningController {
     private final TuningService tuningService;
 
     public TuningController(TuningService tuningService) {
         this.tuningService = tuningService;
     }
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<TuningResponseDTO> createTuning(@RequestBody @Valid TuningCreateDTO tuningCreateDTO){
         TuningResponseDTO responseDTO = tuningService.createTuning(tuningCreateDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);

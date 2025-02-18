@@ -7,6 +7,7 @@ import com.api.carTuning.model.Tuning;
 import com.api.carTuning.repository.TuningRepository;
 import com.api.carTuning.service.TuningService;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,11 @@ import java.util.stream.Collectors;
 @Service
 public class TuningServiceImpl implements TuningService {
     TuningRepository tuningRepository;
+    @Autowired
+    public TuningServiceImpl(TuningRepository tuningRepository) {
+        this.tuningRepository = tuningRepository;
+    }
+
     @Override
     public TuningResponseDTO createTuning(TuningCreateDTO tuningCreateDto) {
         Tuning tuning = TuningMapper.toEntity(tuningCreateDto);

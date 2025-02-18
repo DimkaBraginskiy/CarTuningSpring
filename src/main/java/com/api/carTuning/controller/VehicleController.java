@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/vehicles")
 public class VehicleController {
     private final VehicleService vehicleService;
 
@@ -22,7 +23,7 @@ public class VehicleController {
         this.vehicleService = vehicleService;
     }
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<VehicleResponseDTO> createVehicle(@RequestBody @Valid VehicleCreateDTO vehicleCreateDTO){
         VehicleResponseDTO responseDTO = vehicleService.createVehicle(vehicleCreateDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);

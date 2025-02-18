@@ -7,6 +7,7 @@ import com.api.carTuning.model.Customer;
 import com.api.carTuning.repository.CustomerRepository;
 import com.api.carTuning.service.CustomerService;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,10 @@ import java.util.stream.Collectors;
 public class CustomerServiceImpl implements CustomerService {
 
     CustomerRepository customerRepository;
+    @Autowired
+    public CustomerServiceImpl(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
 
     @Override
     public CustomerResponseDTO createCustomer(CustomerCreateDTO customerCreateDto) {

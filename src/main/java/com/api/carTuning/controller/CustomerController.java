@@ -22,7 +22,7 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<CustomerResponseDTO> createCustomer(@RequestBody @Valid CustomerCreateDTO customerCreateDTO){
         CustomerResponseDTO responseDTO = customerService.createCustomer(customerCreateDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
