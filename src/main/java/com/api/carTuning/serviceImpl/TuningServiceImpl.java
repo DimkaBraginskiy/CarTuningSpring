@@ -4,7 +4,9 @@ import com.api.carTuning.dto.TuningCreateDTO;
 import com.api.carTuning.dto.TuningResponseDTO;
 import com.api.carTuning.mapper.TuningMapper;
 import com.api.carTuning.model.Tuning;
+import com.api.carTuning.model.Vehicle;
 import com.api.carTuning.repository.TuningRepository;
+import com.api.carTuning.repository.VehicleRepository;
 import com.api.carTuning.service.TuningService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +18,21 @@ import java.util.stream.Collectors;
 @Service
 public class TuningServiceImpl implements TuningService {
     TuningRepository tuningRepository;
+    VehicleRepository vehicleRepository;
     @Autowired
-    public TuningServiceImpl(TuningRepository tuningRepository) {
+    public TuningServiceImpl(TuningRepository tuningRepository, VehicleRepository vehicleRepository) {
         this.tuningRepository = tuningRepository;
+        this.vehicleRepository = vehicleRepository;
     }
 
     @Override
     public TuningResponseDTO createTuning(TuningCreateDTO tuningCreateDto) {
+        Vehicle vehicle = vehicleRepository.findById(tuningCreateDto.getVehicleId())
+                .orElseThrow(() -> new RuntimeException("Vehicle not found"));
+
         Tuning tuning = TuningMapper.toEntity(tuningCreateDto);
+        tuning.setVehicle(vehicle);
+
         tuningRepository.save(tuning);
         return TuningMapper.toDto(tuning);
     }

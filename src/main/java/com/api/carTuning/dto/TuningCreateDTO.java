@@ -22,4 +22,6 @@ public class TuningCreateDTO {
     private LocalDate startDate;
     private LocalDate endDate;
     private BigDecimal price;
+    @NotNull(message = "Vehicle ID can not be null")
+    private Long vehicleId;
 }

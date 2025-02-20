@@ -20,5 +20,6 @@ public class VehicleCreateDTO {
     private int horsePower;
     @NotNull(message = "Brand can not be null")
     private String brand;
-
+    @NotNull(message = "Customer ID Can not be null")
+    private Long customerId;
 }

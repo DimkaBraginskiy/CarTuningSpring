@@ -33,7 +33,7 @@ public class Vehicle {
     private String brand;
 
     @ManyToOne
-    @JoinColumn(name = "cutomer_id", nullable = false)
+    @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
     @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tuning> tunings;
